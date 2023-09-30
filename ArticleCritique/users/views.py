@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import LoginForm, SignUpForm
-
+from .models import User
 
 def login_page(request):
     form = LoginForm()
@@ -30,14 +30,23 @@ def logout_user(request):
 
 def sign_up(request):
     form = SignUpForm()
-    context = {'form': form}
+    message = ""
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data["username"])
+            if form.cleaned_data["password1"] == form.cleaned_data["password2"]:
+                User.objects.create_user(username=form.cleaned_data["username"],
+                                         password=form.cleaned_data["password1"],)
+                return redirect('test')
+
+            else:
+                message = 'Les mots de passe ne sont pas identiques.'
+                form = SignUpForm(initial={'username': form.cleaned_data["username"],} )
+
+
     else:
         form = SignUpForm()
-    return render(request, template_name='users/signup.html', context=context)
+    return render(request, template_name='users/signup.html', context={'form': form, 'message': message})
 
 def test(request):
     form = LoginForm()
