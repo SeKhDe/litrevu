@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import TicketForm
+from .models import Ticket
 
-# Create your views here.
+
+
+def ticket_create(request):
+    form = TicketForm()
+
+    return render(request, template_name='litreviews/ticket-create.html', context={'form': form})
