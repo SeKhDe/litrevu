@@ -56,6 +56,10 @@ def ticket_test(request):
 
 # --------------------------------- REVIEWS --------------------------------------------------
 
+def review_create(request):
+    pass
 
+def review_create_response(request):
+    pass
 
 
