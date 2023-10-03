@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Supprimer le ticket</h1>
+
+  <p>Etes-vous sûr de vouloir supprimer le ticket : {{ ticket.title }} ?</p>
+  <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Supprimer">
+  </form>
+</body>
+</html>

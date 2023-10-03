@@ -5,7 +5,7 @@ from .models import User
 
 def login_page(request):
     form = LoginForm()
-    context = {'form': form}
+
     message = ""
     if request.method == "POST":
         form = LoginForm(request.POST)
